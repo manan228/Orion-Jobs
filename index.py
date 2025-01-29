@@ -11,7 +11,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-# from chromedriver_autoinstaller import install
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 load_dotenv()
 
@@ -23,16 +24,15 @@ message = Mail(
 message.template_id = "d-2891c6a8a72d4a83857fd36807b8841e"
 
 def init_driver():
-    options = Options()
+    options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run in headless mode
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    # install()
+    service = Service(ChromeDriverManager().install())
     # service = Service(r"D:\Download\chromedriver-win64\chromedriver-win64\chromedriver.exe")
-    service = Service("/usr/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=options)
-    # driver = webdriver.Chrome(options=options)
     return driver
 
 def scrape_jobs():
