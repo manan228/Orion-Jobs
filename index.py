@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from chromedriver_autoinstaller import install
+# from chromedriver_autoinstaller import install
 
 load_dotenv()
 
@@ -28,10 +28,11 @@ def init_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
 
-    install()
+    # install()
     # service = Service(r"D:\Download\chromedriver-win64\chromedriver-win64\chromedriver.exe")
-    # driver = webdriver.Chrome(service=service, options=options)
-    driver = webdriver.Chrome(options=options)
+    service = Service("/usr/bin/chromedriver")
+    driver = webdriver.Chrome(service=service, options=options)
+    # driver = webdriver.Chrome(options=options)
     return driver
 
 def scrape_jobs():
