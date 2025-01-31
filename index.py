@@ -46,6 +46,7 @@ def scrape_jobs():
         print("No cookie popup appeared.")
     except TimeoutException:
         print("Timed out waiting for the cookie popup to be clickable.")
+        
     # Function to load all jobs by clicking the "Load More" button
     def load_all_jobs():
         while True:
